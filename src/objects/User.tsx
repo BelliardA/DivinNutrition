@@ -5,14 +5,16 @@ class User {
     private _height: number;
     private _activity: number;
     private _sexe: boolean;
+    private _activityPro: number;
 
-    constructor(name: string, age: number, weight: number, height: number, activity: number, sexe: boolean) {
+    constructor(name: string, age: number, weight: number, height: number, activity: number, sexe: boolean, activityPro: number) {
         this._name = name;
         this._age = age;
         this._weight = weight;
         this._height = height;
         this._activity = activity;  // 1 = sédentaire, 2 = peu actif, 3 = actif, 4 = très actif
         this._sexe = sexe; // true = homme, false = femme
+        this._activityPro = activityPro; // 1 = sedentaire, 2 = modéré, 3 = actif
     }
 
     get name() {
