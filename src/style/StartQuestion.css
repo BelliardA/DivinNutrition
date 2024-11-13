@@ -1,0 +1,10 @@
+.btn{
+    display: flex;
+    padding: 13px 86px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 30px;
+    border: 1px solid var(--Pink-Lipides, #F4A79D);
+    background: var(--Main-Background, #FFF);
+}
