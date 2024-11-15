@@ -26,7 +26,7 @@ interface NomProps {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={name} // Lier l'input à la valeur 'name'
+            value={user.name} // Lier l'input à la valeur 'name'
             onChange={handleChange} // Mettre à jour le 'name' à chaque saisie
           />
           <button type="submit">Suivant</button>

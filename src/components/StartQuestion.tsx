@@ -1,5 +1,5 @@
 import "../style/StartQuestion.css";
-import useUserStore  from "../store/Store";
+import useUserStore  from "../store/User";
 import { useState, useEffect } from "react";
 import Nom from "./Questions/Nom";
 import Sexe from "./Questions/Sexe";
@@ -14,6 +14,7 @@ interface StartQuestionProps {
   }
 
 function StartQuestion({ setIsQuestionnaire }: StartQuestionProps) {
+    console.log("StartQuestion");
     const { user, updateUser} = useUserStore();
     const [nbQuestion, setNbQuestion] = useState<number>(0);
 

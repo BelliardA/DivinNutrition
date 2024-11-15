@@ -1,4 +1,6 @@
 import { useState } from "react";
+import DashBoard from "./components/DashBoard";
+
 
 import StartQuestion from "./components/StartQuestion";
 
@@ -12,9 +14,10 @@ function App() {
       </div>
     );
   }else{
+    
     return (
       <div>
-        <h1>Le questionnaire est fini</h1>
+        <DashBoard />
       </div>
     );
   }
