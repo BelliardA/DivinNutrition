@@ -4,12 +4,12 @@ import useFetch from "../hook/useFetch";
 import { useEffect, useState } from "react";
 import Week from "../objects/Week";
 import useMealStore from "../store/MealPlan";
-import Day from "../objects/Day";
-
+import CardMeal from "./CardMeal";
+import "./Dashboard.css"
 function DashBoard() {
   const { user } = useUserStore();
   const newWeek = new Week(1);
-  const { setWeek} = useMealStore();
+  const {week, setWeek} = useMealStore();
   const [isSetWeek, setIsSetWeek ] = useState(false);
 
   const newUser = new User(
@@ -57,10 +57,25 @@ function DashBoard() {
     
   }, [dataBreakFast && dataLunch && dataDinner]);
 
-  return (
-  <div>
+  const storedWeekData = week?.days;
 
-  </div>
+  return (
+    <main className="mainDashboard">
+      {storedWeekData &&
+        Object.entries(storedWeekData).map(([dayName, dayObject]) => (
+          <div key={dayName}>
+            <h2>{dayName}</h2>
+            <div className="daily">
+              {/* Petit déjeuner */}
+              {dayObject.breakfast && <CardMeal data={dayObject.breakfast} />}
+              {/* Déjeuner */}
+              {dayObject.lunch && <CardMeal data={dayObject.lunch} />}
+              {/* Dîner */}
+              {dayObject.dinner && <CardMeal data={dayObject.dinner} />}
+            </div>
+          </div>
+        ))}
+    </main>
   );
 }
 

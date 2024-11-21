@@ -1,0 +1,9 @@
+.mainDashboard{
+    height: 100%;
+}
+
+.daily{
+    display: flex;
+    gap: 20px; /* Espace entre les cartes */
+    width: 280%;
+}
