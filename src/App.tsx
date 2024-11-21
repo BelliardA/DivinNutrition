@@ -7,7 +7,7 @@ import StartQuestion from "./components/StartQuestion";
 function App() {
   const [isQuestionnaire, setIsQuestionnaire] = useState<boolean>(false);
 
-  if(!isQuestionnaire) {
+  if(isQuestionnaire) {
     return (
       <div>
         <StartQuestion setIsQuestionnaire={setIsQuestionnaire} />

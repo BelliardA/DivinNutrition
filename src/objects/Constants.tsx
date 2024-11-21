@@ -2,26 +2,38 @@
 
 export enum ActivityLevel {
     Sedentary = 1,       // Correspond au niveau sédentaire
-    LightlyActive,       // Peu actif
-    Active,              // Actif
-    VeryActive           // Très actif
+    LightlyActive = 2,       // Peu actif
+    Active = 3,              // Actif
+    VeryActive = 4          // Très acti
 }
 
 export enum Sexe {
     Homme = "Homme",
-    Femme = "Femme"
+    Femme = "Femme",
+    None = ""
 }
 
 export enum ProfessionalActivity {
     Sedentary = 1,       // Activité professionnelle sédentaire
-    Moderate,            // Modérée
-    Active               // Active
+    Moderate = 2,            // Modérée
+    Active = 3,               // Active
+    None = 0
 }
 export enum MealType {
     Breakfast = 'breakfast',
     Lunch = 'lunch',
     Dinner = 'dinner',
     Snack = 'snack'
+  }
+
+  export enum Days {
+    Monday = "Monday",
+    Tuesday = "Tuesday",
+    Wednesday = "Wednesday",
+    Thursday = "Thursday",
+    Friday = "Friday",
+    Saturday = "Saturday",
+    Sunday = "Sunday"
   }
 
   export enum DishTypeBreakfast {

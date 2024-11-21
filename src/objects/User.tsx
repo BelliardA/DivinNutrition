@@ -1,6 +1,9 @@
 import { ActivityLevel, ProfessionalActivity, Sexe } from './Constants';
+const appId = import.meta.env.VITE_EDAMAM_APP_ID;
+const appKey = import.meta.env.VITE_EDAMAM_APP_KEY;
+
 class User {
-    private _calories!: number;
+    private _calories?: number;
 
     constructor(
         private _name: string,
@@ -11,6 +14,8 @@ class User {
         private _sexe: Sexe,
         private _activityPro: ProfessionalActivity
     ) {}
+
+    
 
     //Getter pour les valeur qui seront afficher
     get calories() {
@@ -44,6 +49,39 @@ class User {
             dinner: Math.round(totalCalories * 0.25),
             snack: Math.round(totalCalories * 0.05),
         };
+    }
+
+    createUrlBreakFast(): string {
+        const calorie = this.splitCaloriesByMeal().breakfast;
+        const precision = calorie * 0.02;
+        const minCal = calorie - precision;
+        const maxCal = calorie + precision;
+
+        return  `https://api.edamam.com/api/recipes/v2?type=public&mealType=Breakfast&random=true&app_id=${appId}&app_key=${appKey}&calories=${minCal}-${maxCal}`
+
+        
+    }
+
+    createUrlLunch(): string {
+        const calorie = this.splitCaloriesByMeal().lunch;
+        const precision = calorie * 0.02;
+        const minCal = calorie - precision;
+        const maxCal = calorie + precision;
+
+        return `https://api.edamam.com/api/recipes/v2?type=public&mealType=Lunch&random=true&app_id=${appId}&app_key=${appKey}&calories=${minCal}-${maxCal}`
+
+        
+    }
+
+    createUrlDinner(): string {
+        const calorie = this.splitCaloriesByMeal().dinner;
+        const precision = calorie * 0.02;
+        const minCal = calorie - precision;
+        const maxCal = calorie + precision;
+
+        return `https://api.edamam.com/api/recipes/v2?type=public&mealType=Dinner&random=true&app_id=${appId}&app_key=${appKey}&calories=${minCal}-${maxCal}`
+
+        
     }
 }
 
