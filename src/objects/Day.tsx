@@ -1,40 +1,53 @@
 class Day {
-    private _breakfast: any[] = [];
-    private _lunch: any[] = [];
-    private _dinner: any[] = [];
-    private _snack: any[] = [];
+  private _date: string;
+  private _breakfast: any[] = [];
+  private _lunch: any[] = [];
+  private _dinner: any[] = [];
+  private _snack: any[] = [];
 
-    get breakfast() {
-        return this._breakfast;
-    }
+  constructor(date: string) {
+    this._date = date;
+  }
 
-    set breakfast(value: any[]) {
-        this._breakfast = value;
-    }
+  get date() {
+    return this._date;
+  }
 
-    get lunch() {
-        return this._lunch;
-    }
+  set date(value: string) {
+    this._date = value;
+  }
 
-    set lunch(value: any[]) {
-        this._lunch = value;
-    }
+  get breakfast() {
+    return this._breakfast;
+  }
 
-    get dinner() {
-        return this._dinner;
-    }
+  set breakfast(value: any[]) {
+    this._breakfast = value;
+  }
 
-    set dinner(value: any[]) {
-        this._dinner = value;
-    }
+  get lunch() {
+    return this._lunch;
+  }
 
-    get snack() {
-        return this._snack;
-    }
+  set lunch(value: any[]) {
+    this._lunch = value;
+  }
 
-    set snack(value: any[]) {
-        this._snack = value;
-    }
+  get dinner() {
+    return this._dinner;
+  }
+
+  set dinner(value: any[]) {
+    this._dinner = value;
+  }
+
+  get snack() {
+    return this._snack;
+  }
+
+  set snack(value: any[]) {
+    this._snack = value;
+  }
 }
 
 export default Day;

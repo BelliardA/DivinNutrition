@@ -5,12 +5,19 @@ import { useEffect, useState } from "react";
 import Week from "../objects/Week";
 import useMealStore from "../store/MealPlan";
 import CardMeal from "./CardMeal";
-import "./Dashboard.css"
-function DashBoard() {
+import "./../style/Dashboard.css"
+import moment from 'moment';
+
+// Fonction pour obtenir la date du lundi de la semaine
+function getMondayOfWeek(weekNumber: number, year: number): Date {
+  return moment().year(year).week(weekNumber).startOf('isoWeek').toDate();
+}
+
+function DashBoard(currentWeek: any, currentDate: any) {
   const { user } = useUserStore();
-  const newWeek = new Week(1);
-  const {week, setWeek} = useMealStore();
-  const [isSetWeek, setIsSetWeek ] = useState(false);
+  const newWeek = new Week(currentWeek);
+  const { week, setWeek } = useMealStore();
+  const [isSetWeek, setIsSetWeek] = useState(false);
 
   const newUser = new User(
     user._name,
@@ -27,35 +34,39 @@ function DashBoard() {
     isLoading: isLoadingBreakFast,
     error: errorBreakFast,
   } = useFetch(newUser.createUrlBreakFast());
+
   const {
     data: dataLunch,
     isLoading: isLoadingLunch,
     error: errorLunch,
   } = useFetch(newUser.createUrlLunch());
+
   const {
     data: dataDinner,
     isLoading: isLoadingDinner,
     error: errorDinner,
   } = useFetch(newUser.createUrlDinner());
 
- 
-
   useEffect(() => {
     if (dataBreakFast && dataLunch && dataDinner && !isSetWeek) {
+      const currentYear = new Date().getFullYear();
+      const mondayDate = getMondayOfWeek(currentWeek, currentYear); 
+
       Object.entries(newWeek.days).forEach(([dayName, dayObject], index) => {
-        console.log(`Jour : ${dayName}`);
+        const dayDate = new Date(mondayDate);
+        dayDate.setDate(mondayDate.getDate() + index);
+        
+        dayObject.date = moment(dayDate).format('DD/MM/YYYY');
+        console.log(dayObject.date);
         dayObject.breakfast = (dataBreakFast as any).hits[index];
-        console.log(`Breakfast :`, dayObject.breakfast);
         dayObject.lunch = (dataLunch as any).hits[index];
-        console.log(`Lunch :`, dayObject.lunch);
         dayObject.dinner = (dataDinner as any).hits[index];
-        console.log(`Dinner :`, dayObject.dinner);
       });
-      setWeek(newWeek)
+      console.log(newWeek);
+      setWeek(newWeek);
+      setIsSetWeek(true);
     }
-    setIsSetWeek(false)
-    
-  }, [dataBreakFast && dataLunch && dataDinner]);
+  }, [dataBreakFast, dataLunch, dataDinner]);
 
   const storedWeekData = week?.days;
 
@@ -66,11 +77,8 @@ function DashBoard() {
           <div key={dayName}>
             <h2>{dayName}</h2>
             <div className="daily">
-              {/* Petit déjeuner */}
               {dayObject.breakfast && <CardMeal data={dayObject.breakfast} />}
-              {/* Déjeuner */}
               {dayObject.lunch && <CardMeal data={dayObject.lunch} />}
-              {/* Dîner */}
               {dayObject.dinner && <CardMeal data={dayObject.dinner} />}
             </div>
           </div>

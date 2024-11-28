@@ -14,7 +14,6 @@ interface StartQuestionProps {
   }
 
 function StartQuestion({ setIsQuestionnaire }: StartQuestionProps) {
-    console.log("StartQuestion");
     const { user, updateUser} = useUserStore();
     const [nbQuestion, setNbQuestion] = useState<number>(0);
 

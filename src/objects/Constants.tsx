@@ -36,6 +36,7 @@ export enum MealType {
     Sunday = "Sunday"
   }
 
+  //----------------------------------------------------Alimentation ----------------------------------------------------
   export enum DishTypeBreakfast {
     Cereals = "Cereals",
     Bread = "Bread",

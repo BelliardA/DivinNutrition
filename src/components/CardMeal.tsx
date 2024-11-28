@@ -1,4 +1,4 @@
-import "./CardMeal.css"
+import "./../style/CardMeal.css"
 import { Timer } from "lucide-react";
 
 function CardMeal({ data }: { data: any }) {
