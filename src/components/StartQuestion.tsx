@@ -13,9 +13,17 @@ interface StartQuestionProps {
     setIsQuestionnaire: (value: boolean) => void;
   }
 
+  interface Questions {
+    setNbQuestion: (value: number) => void;
+  }
+
 function StartQuestion({ setIsQuestionnaire }: StartQuestionProps) {
-    const { user, updateUser} = useUserStore();
+    const { updateUser} = useUserStore();
     const [nbQuestion, setNbQuestion] = useState<number>(0);
+
+    const incrementNbQuestion = () => {
+        setNbQuestion(nbQuestion + 1);
+    }
 
     useEffect(() => {
         if(nbQuestion === 7) {
@@ -26,13 +34,13 @@ function StartQuestion({ setIsQuestionnaire }: StartQuestionProps) {
     return (
       <div>
         <section className="bloc-question">
-            {nbQuestion === 0 && <Nom user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 1 && <Age user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 2 && <Sexe user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 3 && <Taille user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 4 && <Poids user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 5 && <ActivitePro user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
-            {nbQuestion === 6 && <Activity user={user} updateUser={updateUser} setNbQuestion={setNbQuestion}/>}
+            {nbQuestion === 0 && <Nom updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 1 && <Age updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 2 && <Sexe updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 3 && <Taille updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 4 && <Poids updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 5 && <ActivitePro updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
+            {nbQuestion === 6 && <Activity updateUser={updateUser} incrementNbQuestion={incrementNbQuestion}/>}
          </section>
       </div>
     );
