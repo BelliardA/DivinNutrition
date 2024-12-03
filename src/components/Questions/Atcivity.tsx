@@ -1,21 +1,23 @@
-import User from "../../objects/User";
+import { UserStore } from "../../store/User";
+import { useState } from "react";
+import {ActivityLevel} from "../../objects/Constants";
 
 interface ActivityProps {
-  user: User;
-  updateUser: (updatedFields: { _activity: number }) => void;
-  setNbQuestion: (value: number) => void;
+  updateUser: UserStore["updateUser"];
+  incrementNbQuestion: () => void;
 }
 
-function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value; // Convertir "true"/"false" en boolean
-    console.log(value); // Afficher la valeur sélectionnée
-    updateUser({ _activity: value }); // Mettre à jour l'état de l'utilisateur
-  };
-
+function Activity({ updateUser, incrementNbQuestion }: ActivityProps) {
+  const [activity, setActivity] = useState<ActivityLevel>(); // Utiliser useState pour lier l'input au nom de l'utilisateur
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setNbQuestion((prevNbQuestion: number) => prevNbQuestion + 1); // Passer à la question suivante
+    updateUser({ activity }); 
+    incrementNbQuestion(); // Passer à la question suivante
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setActivity(Number(e.target.value) as ActivityLevel); // Mettre à jour la valeur de 'name' dans le state
   };
 
   return (
@@ -25,8 +27,8 @@ function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
         <label>
           <input
             type="radio"
-            value="1"
-            checked={user.activity === 1}
+            value={ActivityLevel.None}
+            checked={activity === ActivityLevel.None}
             onChange={handleChange}
           />
           Jamais
@@ -34,8 +36,8 @@ function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
         <label>
           <input
             type="radio"
-            value="2"
-            checked={user.activity === 2}
+            value={ActivityLevel.Sedentary}
+            checked={activity === ActivityLevel.Sedentary}
             onChange={handleChange}
           />
           Entre 1 et 2 fois par semaine{" "}
@@ -43,8 +45,8 @@ function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
         <label>
           <input
             type="radio"
-            value="3"
-            checked={user.activity === 3}
+            value={ActivityLevel.LightlyActive}
+            checked={activity === ActivityLevel.LightlyActive}
             onChange={handleChange}
           />
           Entre 2 et 3 fois par semaine{" "}
@@ -52,8 +54,8 @@ function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
         <label>
           <input
             type="radio"
-            value="3"
-            checked={user.activity === 4}
+            value={ActivityLevel.Active}
+            checked={activity === ActivityLevel.Active}
             onChange={handleChange}
           />
           Entre 4 et 5 fois par semaine{" "}
@@ -61,8 +63,8 @@ function Activity({ user, updateUser, setNbQuestion }: ActivityProps) {
         <label>
           <input
             type="radio"
-            value="3"
-            checked={user.activity === 5}
+            value={ActivityLevel.VeryActive}
+            checked={activity === ActivityLevel.VeryActive}
             onChange={handleChange}
           />
            6 fois par semaine ou plus{" "}

@@ -1,6 +1,7 @@
 //Les const de l'app
 
 export enum ActivityLevel {
+    None = 0,               // Aucune activité
     Sedentary = 1,       // Correspond au niveau sédentaire
     LightlyActive = 2,       // Peu actif
     Active = 3,              // Actif
@@ -91,4 +92,14 @@ export enum MealType {
     Japanese = "Japanese",
     Nordic = "Nordic",
     Indian = "Indian",
+  }
+
+  export enum DaysOfWeek {
+    Monday = "monday",
+    Tuesday = "tuesday",
+    Wednesday = "wednesday",
+    Thursday = "thursday",
+    Friday = "friday",
+    Saturday = "saturday",
+    Sunday = "sunday"
   }

@@ -1,4 +1,3 @@
-import User from "../../objects/User";
 import { useState } from "react";
 import { UserStore } from "../../store/User";
 

@@ -13,10 +13,6 @@ interface StartQuestionProps {
     setIsQuestionnaire: (value: boolean) => void;
   }
 
-  interface Questions {
-    setNbQuestion: (value: number) => void;
-  }
-
 function StartQuestion({ setIsQuestionnaire }: StartQuestionProps) {
     const { updateUser} = useUserStore();
     const [nbQuestion, setNbQuestion] = useState<number>(0);

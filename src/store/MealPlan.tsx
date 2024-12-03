@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, devtools } from 'zustand/middleware';
 import { MealType } from '../objects/Constants';
 import Week from '../objects/Week';
+
 
 interface MealStore {
   week: Week | null;
@@ -10,10 +11,11 @@ interface MealStore {
 }
 
 const useMealStore = create<MealStore>()(
-  persist(
+  devtools(
+    persist(
     (set) => ({
       week: null,
-      setWeek: (week) => set({ week }),
+      setWeek: (week : Week) => set({ week }),
       updateMeal: (dayName, mealType, mealData) =>
         set((state) => {
           if (state.week) {
@@ -43,7 +45,7 @@ const useMealStore = create<MealStore>()(
       name: 'meal-store', // Clé utilisée dans le localStorage
       partialize: (state) => ({ week: state.week }), // Sauvegarde uniquement la propriété `week`
     }
-  )
+  ))
 );
 
 export default useMealStore;

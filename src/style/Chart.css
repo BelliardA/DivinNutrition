@@ -1,4 +1,4 @@
-.card{
+.card-stat{
     width: auto;
     height: auto;
     border-radius: 30px;
@@ -6,9 +6,8 @@
     justify-content: left;
     align-items: end;
     background-size: cover;
-    box-shadow: -8px 10px 19px -4px rgba(0,0,0,0.42);
+    box-shadow: var(--box-shadow);
     background-color: white;
     padding: 20px;
     padding-bottom: 40px;
-   
 }

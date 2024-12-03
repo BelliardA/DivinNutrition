@@ -13,6 +13,7 @@ const getUserFromLocalStorage = (): User => {
   const localStorageUser = localStorage.getItem('user'); // Récupérer l'utilisateur depuis localStorage
   const userData = localStorageUser ? JSON.parse(localStorageUser) : null;
   if (userData) {
+    console.log("user zustand ",userData);
     return new User(userData); // Récupérer l'objet utilisateur depuis localStorage
   }
   // Retourner un utilisateur par défaut
@@ -21,7 +22,6 @@ const getUserFromLocalStorage = (): User => {
 
 // Fonction pour enregistrer un utilisateur dans le localStorage
 const saveUserToLocalStorage = (user: UserInterface) => {
-  console.log(user);
   localStorage.setItem('user', JSON.stringify(user)); // Sauvegarder l'objet utilisateur dans localStorage
 };
 
@@ -29,7 +29,7 @@ const useUserStore = create<UserStore>((set) => ({
   user: getUserFromLocalStorage(), // Initialiser l'utilisateur depuis le localStorage
   updateUser: (updatedFields: any) => 
     set((store: UserStore) => {
-      const updatedUser = { ...store.user.getProperties(), ...updatedFields };
+      const updatedUser ={ ...store.user, ...updatedFields };
       saveUserToLocalStorage(updatedUser); // Sauvegarder l'utilisateur mis à jour dans le localStorage
       return { user: updatedUser };
     }),

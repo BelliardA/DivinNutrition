@@ -90,6 +90,7 @@ class User {
         ? 10 * this.weight + 6.25 * this.height - 5 * this.age + 5
         : 10 * this.weight + 6.25 * this.height - 5 * this.age - 161;
     const activityMultiplier = {
+      [ActivityLevel.None]: 1.1,
       [ActivityLevel.Sedentary]: 1.2,
       [ActivityLevel.LightlyActive]: 1.375,
       [ActivityLevel.Active]: 1.55,
@@ -130,7 +131,7 @@ class User {
     //   Math.floor(Math.random() * dishTypes.length)
     // ] as DishTypeBreakfast;
 
-    const url = `https://api.edamam.com/api/recipes/v2?type=public&mealType=Breakfast&random=true&app_id=${appId}&app_key=${appKey}&calories=${minCal}-${maxCal}&cuisineType=${randomCuisineType}`;
+    const url = `https://api.edamam.com/api/recipes/v2?type=public&mealType=Breakfast&random=true&app_id=${appId}&app_key=${appKey}&calories=${minCal}-${maxCal}`;
 
     return url;
   }

@@ -1,11 +1,25 @@
 import { useState, useEffect } from 'react';
+import useMealStore from '../store/MealPlan';
+import Week from '../objects/Week';
 
-const useFetch = (url : string) => {
+import StateUseFecth from '../store/StateUseFetch';
+import { MealType } from '../objects/Constants';
+
+import moment from "moment";
+
+function getMondayOfWeek(weekNumber: number, year: number): Date {
+  return moment().year(year).week(weekNumber).startOf("isoWeek").toDate();
+}
+
+const useFetch = (url : string, currentWeek : number, type : MealType) => {
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {setState} = StateUseFecth();
+
+  const newWeek = new Week(currentWeek);
+  const { updateMeal } = useMealStore();
 
   useEffect(() => {
+    setState(true, '');
       fetch(url)
       .then(response => {
         if (!response.ok) { 
@@ -15,17 +29,23 @@ const useFetch = (url : string) => {
         return response.json();
       })
       .then(data => {
-        setIsLoading(false);
+        setState(false, '');
         setData(data);
-        setError(null);
       })
       .catch(err => {
-        setIsLoading(false);
-        setError(err.message);
+        setState(false, err.message);
       })
-  }, [url])
+  }, [])
 
-  return { data, isLoading, error };
+  const mondayDate = getMondayOfWeek(currentWeek, new Date().getFullYear());
+
+  Object.entries(newWeek.days).forEach(([dayName, dayObject], index) => {
+    const dayDate = new Date(mondayDate);
+    dayDate.setDate(mondayDate.getDate() + index);
+
+    dayObject.date = moment(dayDate).format("DD/MM/YYYY");
+    updateMeal(dayName, type, (data as any).hits[index]);
+  });
 }
 
 export default useFetch;

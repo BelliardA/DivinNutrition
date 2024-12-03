@@ -1,4 +1,6 @@
 import { UserStore } from "../../store/User";
+import { Sexe as SexeConstants } from "../../objects/Constants";
+import { useState } from "react";
 
 interface SexeProps {
   updateUser: UserStore["updateUser"];
@@ -6,17 +8,17 @@ interface SexeProps {
 }
 
 function Sexe({ updateUser, incrementNbQuestion }: SexeProps) {
+  const [sexe, setSexe] = useState<SexeConstants>();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value === "true"; // Convertir "true"/"false" en boolean
-        console.log(value); // Afficher la valeur sélectionnée
-        updateUser({ sexe: value }); // Mettre à jour l'état de l'utilisateur
-      };
-
-      const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        incrementNbQuestion(); // Passer à la question suivante
-      };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateUser({ sexe  });
+    incrementNbQuestion(); // Passer à la question suivante
+  };
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSexe(e.target.value as SexeConstants); // Mettre à jour l'état de l'utilisateur
+    };
 
   return (
     <div>
@@ -26,7 +28,7 @@ function Sexe({ updateUser, incrementNbQuestion }: SexeProps) {
           <input
             type="radio"
             value="true"
-            checked={sexe === true}
+            checked={sexe === SexeConstants.Homme}
             onChange={handleChange}
           />
           Homme
@@ -35,7 +37,7 @@ function Sexe({ updateUser, incrementNbQuestion }: SexeProps) {
           <input
             type="radio"
             value="false"
-            checked={user.sexe === false}
+            checked={sexe === SexeConstants.Femme}
             onChange={handleChange}
           />
           Femme

@@ -1,7 +1,8 @@
 import { Minus, Plus } from 'lucide-react';
+import "../style/ButtonWeight.css";
 
 interface User {
-  _weight: number; 
+  weight: number; 
 }
 
 interface ButtonWeightProps {
@@ -12,12 +13,12 @@ interface ButtonWeightProps {
 function ButtonWeight({ user, updateUser }: ButtonWeightProps) {
 
   const handleMinus = () => {
-    let tmp = parseFloat((user._weight - 0.1).toFixed(1)); 
-    updateUser({ _weight: tmp });
+    let tmp = parseFloat((user.weight - 0.1).toFixed(1)); 
+    updateUser({ weight: tmp });
   }
   const handlePlus = () => {
-    let tmp = parseFloat((user._weight + 0.1).toFixed(1));
-    updateUser({ _weight: tmp});
+    let tmp = parseFloat((user.weight + 0.1).toFixed(1));
+    updateUser({ weight: tmp});
   }
   
   return (
@@ -25,7 +26,7 @@ function ButtonWeight({ user, updateUser }: ButtonWeightProps) {
         <button onClick={handleMinus}>
             <Minus size={36} />
         </button>
-        <h3>{user._weight}</h3>
+        <h3>{user.weight} kg</h3>
         <button onClick={handlePlus}>
             <Plus size={36} />
         </button>

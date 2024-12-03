@@ -1,23 +1,24 @@
-import User from "../../objects/User";
+import { useState } from "react";
+import { UserStore } from "../../store/User";
+import { ProfessionalActivity} from "../../objects/Constants";
 
 interface ActiviteProProps {
-  user: User;
-  updateUser: (updatedFields: { _activityPro: number }) => void;
-  setNbQuestion: (value: number) => void;
+  updateUser: UserStore["updateUser"];
+  incrementNbQuestion: () => void;
 }
 
-function ActivitePro({ user, updateUser, setNbQuestion }: ActiviteProProps) {
+function ActivitePro({ updateUser, incrementNbQuestion }: ActiviteProProps) {
+  const [activityPro, setActivityPro] = useState<ProfessionalActivity>();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value; // Convertir "true"/"false" en boolean
-        console.log(value); // Afficher la valeur sélectionnée
-        updateUser({ _activityPro: value }); // Mettre à jour l'état de l'utilisateur
-      };
-
-      const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setNbQuestion((prevNbQuestion: number) => prevNbQuestion + 1); // Passer à la question suivante
-      };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateUser({ activityPro });
+    incrementNbQuestion(); // Passer à la question suivante
+  };
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+       setActivityPro(e.target.value as unknown as ProfessionalActivity);// Mettre à jour l'état de l'utilisateur
+    };
 
   return (
     <div>
@@ -26,8 +27,8 @@ function ActivitePro({ user, updateUser, setNbQuestion }: ActiviteProProps) {
         <label>
           <input
             type="radio"
-            value="1"
-            checked={user.activityPro === 1}
+            value={ProfessionalActivity.Sedentary}
+            checked={activityPro === ProfessionalActivity.Sedentary}
             onChange={handleChange}
           />
           Sédentaire: travail de bureau, peu d’activité
@@ -35,8 +36,8 @@ function ActivitePro({ user, updateUser, setNbQuestion }: ActiviteProProps) {
         <label>
           <input
             type="radio"
-            value="2"
-            checked={user.activityPro === 2}
+            value={ProfessionalActivity.Moderate}
+            checked={activityPro === ProfessionalActivity.Moderate}
             onChange={handleChange}
           />
           Modéré : activité physique légère, activité physique modéré
@@ -44,8 +45,8 @@ function ActivitePro({ user, updateUser, setNbQuestion }: ActiviteProProps) {
         <label>
           <input
             type="radio"
-            value="3"
-            checked={user.activityPro === 3}
+            value={ProfessionalActivity.Active}
+            checked={activityPro === ProfessionalActivity.Active}
             onChange={handleChange}
           />
         Actif : travail physiquement exigeant
