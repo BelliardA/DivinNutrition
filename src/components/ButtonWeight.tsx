@@ -7,14 +7,14 @@ interface User {
 
 interface ButtonWeightProps {
   user: User;
-  updateUser: (user: Partial<User>) => void; 
+  updateUser: (param: string, value: string | number) => void;
 }
 
 function ButtonWeight({ user, updateUser }: ButtonWeightProps) {
 
   const handleMinus = () => {
     let tmp = parseFloat((user.weight - 0.1).toFixed(1)); 
-    updateUser({ weight: tmp });
+    updateUser(_weight, tmp);
   }
   const handlePlus = () => {
     let tmp = parseFloat((user.weight + 0.1).toFixed(1));

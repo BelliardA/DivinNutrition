@@ -8,11 +8,11 @@ interface SexeProps {
 }
 
 function Sexe({ updateUser, incrementNbQuestion }: SexeProps) {
-  const [sexe, setSexe] = useState<SexeConstants>();
+  const [sexe, setSexe] = useState<SexeConstants>(SexeConstants.Homme); 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateUser({ sexe  });
+    updateUser('_sexe', sexe); // Mettre à jour le nom de l'utilisateur dans le store
     incrementNbQuestion(); // Passer à la question suivante
   };
   

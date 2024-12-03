@@ -11,7 +11,7 @@ interface PoidsProps {
   
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      updateUser({ weight }); // Mettre à jour le nom de l'utilisateur dans le store
+      updateUser("_weight", weight); // Mettre à jour le nom de l'utilisateur dans le store
       incrementNbQuestion(); // Passer à la question suivante
     };
   

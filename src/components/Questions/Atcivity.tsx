@@ -8,11 +8,11 @@ interface ActivityProps {
 }
 
 function Activity({ updateUser, incrementNbQuestion }: ActivityProps) {
-  const [activity, setActivity] = useState<ActivityLevel>(); // Utiliser useState pour lier l'input au nom de l'utilisateur
+  const [activity, setActivity] = useState<ActivityLevel>(ActivityLevel.Sedentary); // Utiliser useState pour lier l'input au nom de l'utilisateur
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateUser({ activity }); 
+    updateUser('_activity', activity); 
     incrementNbQuestion(); // Passer à la question suivante
   };
 

@@ -11,7 +11,7 @@ interface TailleProps {
   
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      updateUser({ height}); // Mettre à jour le nom de l'utilisateur dans le store
+      updateUser('_height', height); // Mettre à jour le nom de l'utilisateur dans le store
       incrementNbQuestion(); // Passer à la question suivante
     };
   

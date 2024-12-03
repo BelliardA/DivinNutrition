@@ -11,7 +11,7 @@ interface AgeProps {
   
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      updateUser({ age }); // Mettre à jour le nom de l'utilisateur dans le store
+      updateUser('_age', age); // Mettre à jour le nom de l'utilisateur dans le store
       incrementNbQuestion(); // Passer à la question suivante
     };
   

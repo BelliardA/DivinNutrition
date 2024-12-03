@@ -8,11 +8,11 @@ interface ActiviteProProps {
 }
 
 function ActivitePro({ updateUser, incrementNbQuestion }: ActiviteProProps) {
-  const [activityPro, setActivityPro] = useState<ProfessionalActivity>();
+  const [activityPro, setActivityPro] = useState<ProfessionalActivity>(ProfessionalActivity.Sedentary); 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateUser({ activityPro });
+    updateUser('_activityPro', activityPro);
     incrementNbQuestion(); // Passer à la question suivante
   };
   

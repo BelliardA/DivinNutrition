@@ -11,7 +11,7 @@ interface NomProps {
   
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      updateUser({ name }); // Mettre à jour le nom de l'utilisateur dans le store
+      updateUser('_name', name); // Mettre à jour le nom de l'utilisateur dans le store
       incrementNbQuestion(); // Passer à la question suivante
     };
   
