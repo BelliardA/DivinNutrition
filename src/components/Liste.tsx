@@ -2,11 +2,18 @@ import "../style/Liste.css";
 import { useState, useEffect } from "react";
 import Aliment from "../store/Aliment";
 
-function List() {
-  const { alimentsId } = Aliment();
-  const [aliments, setAliments] = useState<any[]>([]); // To store the fetched aliment data
+export interface macroNutrient{
+  protein: number;
+  glucides: number;
+  lipids: number;
+  calories: number;
+}
 
-  // Function to fetch aliment data based on id
+function List() {
+  const { alimentsId, setNutrients} = Aliment();
+  const [aliments, setAliments] = useState<any[]>([]); // To store the fetched aliment data
+  const [prepareForNutrients, setPrepareForNutrients] = useState<macroNutrient[]>([]);
+
   const fetchAliments = async (id: number) => {
     try {
       const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${id}`);
@@ -14,35 +21,44 @@ function List() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      return data.product;  // Assuming the product data is inside "product"
+      return data.product;  
     } catch (error) {
       console.error("Fetch error:", error);
       return null;
     }
   };
 
-  // UseEffect hook to fetch aliments when component mounts or when alimentsId changes
   useEffect(() => {
     const fetchAllAliments = async () => {
       const alimentData = await Promise.all(
-        alimentsId.map((id) => fetchAliments(id))  // Fetch data for all aliment ids
+        alimentsId.map((id) => fetchAliments(id)) 
       );
-      setAliments(alimentData.filter((aliment) => aliment !== null)); // Set state with valid data
+      setAliments(alimentData.filter((aliment) => aliment !== null));
+
     };
 
     fetchAllAliments();
-  }, [alimentsId]); // Trigger when the list of alimentsId changes
+  }, [alimentsId]); 
 
   const handleAddAliment = (id: number) => {
-    // Your logic for adding aliment (e.g., add to a list or update store)
     console.log("Aliment added:", id);
   };
+
+  aliments.map((aliment) => {
+    let fat = aliment.nutriments_estimated.fat_100g;
+    let protein = aliment.nutriments_estimated.proteins_100g;
+    let carbohydrates = aliment.nutriments_estimated.carbohydrates_100g;
+    let calories = aliment.nutriments_estimated["energy-kcal_100g"];
+    console.log("Fat:", fat, "Protein:", protein, "Carbohydrates:", carbohydrates, "Calories:", calories);
+  });
+
+  console.log("Aliments:", aliments);
 
   return (
     <div className="results">
       <div className="label">
         <p>Nom</p>
-        <p className="p-discret">Calories</p>
+        <p className="p-discret">Calories / 100g</p>
       </div>
 
       {aliments.map((aliment) => (

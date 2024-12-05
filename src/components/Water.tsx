@@ -9,7 +9,7 @@ interface WaterProps {
 
 const EmptyGlass = () => (
   <svg width="32" height="32" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19.8429 28H11.1571C10.484 28.0036 9.83355 27.7646 9.33198 27.3293C8.8304 26.8941 8.51352 26.2937 8.44286 25.6447L6 3H25L22.5436 25.6447C22.4731 26.2914 22.1582 26.89 21.6595 27.3249C21.1608 27.7598 20.5136 28.0003 19.8429 28Z" stroke="black" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19.8429 28H11.1571C10.484 28.0036 9.83355 27.7646 9.33198 27.3293C8.8304 26.8941 8.51352 26.2937 8.44286 25.6447L6 3H25L22.5436 25.6447C22.4731 26.2914 22.1582 26.89 21.6595 27.3249C21.1608 27.7598 20.5136 28.0003 19.8429 28Z" stroke="black" strokeWidth="2.66667" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 

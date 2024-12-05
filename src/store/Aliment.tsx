@@ -1,10 +1,20 @@
 import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 
+export interface macroNutrient{
+  protein: number;
+  glucides: number;
+  lipids: number;
+  calories: number;
+}
+
 export interface AlimentStore {
   alimentsId: number[];
+  nutrients: macroNutrient[];
   setAliments: (id: number) => void; 
-  clearAliments: () => void;
+  setNutrients: (nutrients: macroNutrient) => void;
+  clearAll: () => void;
+
 }
 
 const Aliment = create<AlimentStore>()(
@@ -12,10 +22,14 @@ const Aliment = create<AlimentStore>()(
     persist(
       (set) => ({
         alimentsId: [],
+        nutrients: [],
         setAliments: (id) => set((state) => ({
           alimentsId: [...state.alimentsId, id]  
         })),
-        clearAliments: () => set({ alimentsId: [] }),
+        setNutrients: (tmp: macroNutrient) => set((state) => ({
+          nutrients: Array.isArray(state.nutrients) ? [...state.nutrients, tmp] : [tmp]
+        })),
+        clearAll: () => set({ alimentsId: [] , nutrients: []}),
       }),
       { name: 'aliments' }
     )
