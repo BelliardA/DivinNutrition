@@ -4,7 +4,6 @@ import "../style/SearchAliment.css";
 import { Search, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aliment from "../store/Aliment";
-import { set } from "date-fns";
 
 function SearchAliment() {
   const [search, setSearch] = useState<string>("");

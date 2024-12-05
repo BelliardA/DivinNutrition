@@ -7,7 +7,7 @@ import useUserStore from "../store/User";
 import useFetch from "../hook/useFetch";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, List } from "lucide-react";
+import { CalendarDays, Plus} from "lucide-react";
 
 
 import Chart from "./Chart";
@@ -15,6 +15,7 @@ import ButtonWeight from "./ButtonWeight";
 import CardMeal from "./CardMeal";
 import IsFetch from "../store/IsFetch";
 import Liste from "./Liste";
+import Water from "./Water";
 
 interface DashBoardProps {
   currentWeek: number;
@@ -59,6 +60,7 @@ function DashBoard({
 
   const [macroNutrient, setMacroNutrient] = useState<Macronutrient>();
   const [caloriesPerDay, setCaloriesPerDay] = useState<number>(0);
+  const [totalWater, setTotalWater] = useState<number>(0);
   const { user, updateUser } = useUserStore();
   const navigate = useNavigate();
   const {isFetch} = IsFetch();
@@ -110,7 +112,18 @@ function DashBoard({
     <section className="en-cas">
       <h2>En-cas</h2>
       <Liste/>
-      <button onClick={searchAliment}>Ajouter</button>
+      <button className="btn-ajouter-dashboard" onClick={searchAliment}>
+        <Plus size={36} color="#000000" />
+        <h3>Ajouter</h3>
+      </button>
+    </section>
+    <section className="water">
+      <h2>Consommation d'eau</h2>
+      <p>
+      Votre consommation d'eau est de{" "}
+        {totalWater >= 100 ? `${(totalWater / 100).toFixed(2)} L` : `${totalWater} cl`}
+      </p>
+      <Water totalWater={totalWater} setTotalWater={setTotalWater}/>
     </section>
   </main>);
 }
