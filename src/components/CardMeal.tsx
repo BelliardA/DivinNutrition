@@ -5,8 +5,8 @@ import { DaysOfWeek, MealType } from "../objects/Constants";
 import { useEffect, useState } from "react";
 
 interface CardMealProps {
-  mealType: MealType;
-  dayName: DaysOfWeek;
+  mealType: string;
+  dayName: string;
 }
 
 function CardMeal({ mealType, dayName }: CardMealProps) {

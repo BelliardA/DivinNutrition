@@ -1,0 +1,34 @@
+.label{
+    margin: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ligne{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 30px;
+}
+
+.ligne p {
+    max-width: 60px;
+}
+
+.separateur {
+    border-bottom: 1px solid black;
+    margin: 10px 20px;
+    opacity: 0.2;;
+}
+
+.aliment-img{
+    width: 100px;
+    height: 100px;
+    margin: 10px 20px;
+    object-fit: cover;
+}
+
+.btn-add-liste{
+    border: none;
+    width: 100%;
+    background-color: transparent;
+}

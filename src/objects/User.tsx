@@ -1,23 +1,22 @@
-import UserInterface from "../types/UserInterface";
 import {
   ActivityLevel,
   ProfessionalActivity,
   Sexe,
   // DishTypeBreakfast,
-  BreakfastCuisineType,
+  // BreakfastCuisineType,
 } from "./Constants";
 const appId = import.meta.env.VITE_EDAMAM_APP_ID;
 const appKey = import.meta.env.VITE_EDAMAM_APP_KEY;
 
 class User {
 
-  private _name: string;
-  private _age: number;
-  private _weight: number;
-  private _height: number;
-  private _activity: ActivityLevel;
-  private _sexe: Sexe;
-  private _activityPro: ProfessionalActivity;
+  public _name: string;
+  public _age: number;
+  public _weight: number;
+  public _height: number;
+  public _activity: ActivityLevel;
+  public _sexe: Sexe;
+  public _activityPro: ProfessionalActivity;
 
   constructor(
     user = 
@@ -44,51 +43,12 @@ class User {
   get calories() {
     return this.calculateCalories();
   }
-  get name() {
-    return this._name;
-  }
-
-  get age() {
-    return this._age;
-  }
-
-  get weight() {
-    return this._weight;
-  }
-
-  get height() {
-    return this._height;
-  }
-
-  get activity() {
-    return this._activity;
-  }
-
-  get sexe() {
-    return this._sexe;
-  }
-
-  get activityPro() {
-    return this._activityPro;
-  }
-
-  getProperties(): UserInterface{
-    return {
-      name : this._name,
-      age : this._age,
-      weight : this._weight,
-      height : this._height,
-      activity : this._activity,
-      sexe : this._sexe,
-      activityPro : this._activityPro
-    }
-  }
 
   calculateCalories(): number {
     const baseCalories =
-      this.sexe === Sexe.Homme
-        ? 10 * this.weight + 6.25 * this.height - 5 * this.age + 5
-        : 10 * this.weight + 6.25 * this.height - 5 * this.age - 161;
+      this._sexe === Sexe.Homme
+        ? 10 * this._weight + 6.25 * this._height - 5 * this._age + 5
+        : 10 * this._weight + 6.25 * this._height - 5 * this._age - 161;
     const activityMultiplier = {
       [ActivityLevel.None]: 1.1,
       [ActivityLevel.Sedentary]: 1.2,
@@ -120,13 +80,13 @@ class User {
     const minCal = calorie - precision;
     const maxCal = calorie + precision;
 
-    const cuisineTypes = Object.values(BreakfastCuisineType);
+    // const cuisineTypes = Object.values(BreakfastCuisineType);
     // const dishTypes = Object.values(DishTypeBreakfast);
 
     // Génération aléatoire des types avec le bon typage
-    const randomCuisineType = cuisineTypes[
-      Math.floor(Math.random() * cuisineTypes.length)
-    ] as BreakfastCuisineType;
+    // const randomCuisineType = cuisineTypes[
+    //   Math.floor(Math.random() * cuisineTypes.length)
+    // ] as BreakfastCuisineType;
     // const randomDishType = dishTypes[
     //   Math.floor(Math.random() * dishTypes.length)
     // ] as DishTypeBreakfast;
@@ -155,10 +115,9 @@ class User {
   }
 
   nessesaryMacroNutr() {
-    const totalCalories = this.calculateCalories();
-    const protein = Math.round((totalCalories * 0.15) / 4);
-    const glucides = Math.round((totalCalories * 0.55) / 4);
-    const lipids = Math.round((totalCalories * 0.3) / 9);
+    const protein = Math.round((this._weight * 2));   //2g par kilo
+    const lipids = Math.round((this._weight * 0.8));   //0.8g par kilo
+    const glucides = lipids + protein ;
 
     return {protein, glucides, lipids};
   }

@@ -1,47 +1,19 @@
-import { useEffect, useState } from "react";
-
-import MealPlanDashboard from "./components/Date";
-import DashBoard from "./components/DashBoard";
-import StartQuestion from "./components/StartQuestion";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";   
+import MealPlan from "./components/MealPlan";
+import SearchAliment from "./components/SearchAliment";
 
 
 function App() {
-  const [isQuestionnaire, setIsQuestionnaire] = useState<boolean>(false);
-  const [currentWeek, setCurrentWeek] = useState<number>(0);
-  const [currentDate, setCurrentDate] = useState<string>("");
-  const [isWeekAlreadyFetched, setIsWeekAlreadyFetched] = useState<boolean>(
-    () => JSON.parse(localStorage.getItem('isWeekAlreadyFetched') || 'false')
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/meal-plan" element={<MealPlan />} />
+        <Route path="search-aliment" element={<SearchAliment/>} />
+      </Routes>
+    </Router>
   );
-
-  useEffect(() => {
-    // Enregistre la valeur dans le Local Storage chaque fois qu'elle change
-    localStorage.setItem('isWeekAlreadyFetched', JSON.stringify(isWeekAlreadyFetched));
-  }, [isWeekAlreadyFetched]);
-
-  useEffect(() => {
-    // Seulement réinitialiser si la semaine n'a pas été récupérée
-    if (!isWeekAlreadyFetched) {
-      setIsWeekAlreadyFetched(false);
-    }
-  }, [currentWeek]);
-
-
-  if(!isQuestionnaire) { //mettre !isQuestionnaire pour la version finale
-    return (
-      <div>
-        <StartQuestion setIsQuestionnaire={setIsQuestionnaire} />
-      </div>
-    );
-  }else{
-    return (
-      <>
-        <MealPlanDashboard setCurrentWeek={setCurrentWeek} setCurrentDate={setCurrentDate}/>
-        <DashBoard currentWeek={currentWeek} isWeekAlreadyFetched={isWeekAlreadyFetched} setIsWeekAlreadyFetched={setIsWeekAlreadyFetched}/>
-      </>
-    );
-  }
-
-
 
 }
 
