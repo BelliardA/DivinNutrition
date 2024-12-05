@@ -84,7 +84,7 @@ function DashBoard({
   useEffect(() => {
     setCaloriesPerDay(newUser.calculateCalories());
     setMacroNutrient(newUser.nessesaryMacroNutr());
- }, [newUser._weight]);
+ }, [user._weight]);
 
  const navigateToMealPlan = () => {
     navigate("/meal-plan");

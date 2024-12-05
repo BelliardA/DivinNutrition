@@ -1,34 +1,32 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from "chart.js";
-import "../style/Chart.css"
+import "../style/Chart.css";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
-
 const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
   {lipids : number, glucides : number, proteins : number, caloriesPerDay:number}) => {
-  // Données de test pour le graphique Doughnut
-  // Données du graphique Doughnut
-
   // Plugin personnalisé pour afficher le texte au centre du donut
   const centerTextPlugin = {
     id: 'centerText',
-    beforeDraw: (chart: any) => {
-      const { width } = chart;
-      const { ctx } = chart;
-  
+    beforeDraw: (chart : any) => {
+      const { ctx, chartArea, config } = chart;
+      const calories = config.options.plugins.centerText.caloriesPerDay; // Récupération de la valeur depuis les options
+      
       ctx.save();
       ctx.font = '17pt Be Vietnam Pro'; 
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'rgb(0, 0, 0)'; 
-      ctx.fillText(`${caloriesPerDay} Kcal`, width / 2, chart.chartArea.height / 2);
+      ctx.fillStyle = 'rgb(0, 0, 0)';
+      ctx.clearRect(0, 0, chart.width, chart.height); // Efface le texte précédent
+      ctx.fillText(`${calories} Kcal`, chart.width / 2, chartArea.height / 2); // Affiche les calories au centre
       ctx.restore();
     },
   };
 
+  // Données du graphique Doughnut
   const data = {
-    labels: ['Lipides', 'Glucides', 'Protéines'], 
+    labels: ['Lipides', 'Glucides', 'Protéines'],
     datasets: [
       {
         label: 'Apports nutritionnels',
@@ -38,11 +36,10 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
           '#FFD700', // Jaune pour les glucides
           '#4169E1', // Bleu pour les protéines
         ],
-        borderWidth: 0, // Supprimer les bordures pour un look plus épuré
+        borderWidth: 0,
         cutout: '80%', // Ajuste l'épaisseur de l'anneau
       },
     ],
-    caloriesPerDay, // Ajout des calories pour le plugin
   };
 
   // Options du graphique
@@ -50,15 +47,12 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
+      centerText: {
+        caloriesPerDay,  // Passe la valeur ici
+      },
       legend: {
-        position: 'right', 
-        display:false,
-        labels: {
-          boxWidth: 20,
-          font: {
-            size: 14,
-          },
-        },
+        position: 'right',
+        display: false,
       },
       tooltip: {
         callbacks: {
@@ -73,7 +67,7 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
   return (
     <div className="card-stat">
       <div className="doughnut-container">
-        <Doughnut data={data} options={options} plugins={[centerTextPlugin]}/>
+        <Doughnut data={data} options={options} plugins={[centerTextPlugin]} />
       </div>
       <div className="legend">
         <div className="contain-legend">
