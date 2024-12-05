@@ -13,16 +13,16 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
   // Plugin personnalisé pour afficher le texte au centre du donut
   const centerTextPlugin = {
     id: 'centerText',
-    beforeDraw: (chart) => {
+    beforeDraw: (chart: any) => {
       const { width } = chart;
       const { ctx } = chart;
   
       ctx.save();
-      ctx.font = 'bold 6.7pt Arial'; 
+      ctx.font = '17pt Be Vietnam Pro'; 
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = 'rgb(0, 0, 0)'; 
-      ctx.fillText(`${caloriesPerDay} Calorie`, width / 2, chart.chartArea.height / 2);
+      ctx.fillText(`${caloriesPerDay} Kcal`, width / 2, chart.chartArea.height / 2);
       ctx.restore();
     },
   };
@@ -39,7 +39,7 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
           '#4169E1', // Bleu pour les protéines
         ],
         borderWidth: 0, // Supprimer les bordures pour un look plus épuré
-        cutout: '70%', // Ajuste l'épaisseur de l'anneau
+        cutout: '80%', // Ajuste l'épaisseur de l'anneau
       },
     ],
     caloriesPerDay, // Ajout des calories pour le plugin
@@ -51,7 +51,7 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'right', // Légende à droite
+        position: 'right', 
         display:false,
         labels: {
           boxWidth: 20,
@@ -62,7 +62,7 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
       },
       tooltip: {
         callbacks: {
-          label: function (tooltipItem) {
+          label: function (tooltipItem : any) {
             return `${tooltipItem.label}: ${tooltipItem.raw}g`;
           },
         },
@@ -72,7 +72,32 @@ const DoughnutChart = ({lipids,glucides, proteins, caloriesPerDay} :
 
   return (
     <div className="card-stat">
-      <Doughnut data={data} options={options} plugins={[centerTextPlugin]}/>
+      <div className="doughnut-container">
+        <Doughnut data={data} options={options} plugins={[centerTextPlugin]}/>
+      </div>
+      <div className="legend">
+        <div className="contain-legend">
+          <div className="glucides couleur"></div>
+          <div className="text-legend">
+            <h4>Glucides</h4>
+            <p>{glucides}g</p>
+          </div>
+        </div>
+        <div className="contain-legend">
+          <div className="lipides couleur"></div>
+          <div className="text-legend">
+            <h4>Lipides</h4>
+            <p>{lipids}g</p>
+          </div>
+        </div>
+        <div className="contain-legend">
+          <div className="proteines couleur"></div>
+          <div className="text-legend">
+            <h4>Protéines</h4>
+            <p>{proteins}g</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,13 +1,51 @@
-.card-stat{
-    width: auto;
-    height: auto;
+.card-stat {
     border-radius: 30px;
-    display: flex;
-    justify-content: left;
-    align-items: end;
-    background-size: cover;
+    display: flex;/* Stack the chart and legend vertically */
+    align-items: center;     /* Center content horizontally */
+    justify-content: space-between;
     box-shadow: var(--box-shadow);
-    background-color: white;
+    background-color: var(--main-background);
     padding: 20px;
-    padding-bottom: 40px;
-}
+    max-width: 380px;        /* Limit card width */
+    gap: 10px;       /* Center the card on the page */
+  }
+  
+  .doughnut-container {
+    position: relative;      /* Ensures it doesn't overflow */
+    width: 200px;            /* Set the chart size */
+    height: 200px;
+  }
+
+  .legend{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contain-legend{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .text-legend{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .text-legend p,h4{
+    margin: 0;
+  }
+  
+
+  .couleur{
+    width: 9px;
+    height: 20px;
+    border-radius: 5px;
+    align-self: start;
+  }
+  /* Colors for the legend dots */
+  .glucides { background-color: var(--yellow-glucide); }
+  .lipides{ background-color: var(--pink-lipid); }
+  .proteines{ background-color: var(--blue-pretein); }
