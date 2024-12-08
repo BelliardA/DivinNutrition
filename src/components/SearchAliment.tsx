@@ -72,7 +72,7 @@ function SearchAliment() {
       <div className="results">
         <div className="label">
           <p>Nom</p>
-          <p className="p-discret">Calories</p>
+          <p className="p-discret">Calories / 100g</p>
         </div>
         {aliments.map((aliment) => {
           return (

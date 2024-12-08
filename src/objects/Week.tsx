@@ -7,13 +7,13 @@ class Week {
     constructor(numWeek: number) {
         this._numWeek = numWeek;
         this._days = {
-            monday: new Day(),
-            tuesday: new Day(),
-            wednesday: new Day(),
-            thursday: new Day(),
-            friday: new Day(),
-            saturday: new Day(),
-            sunday: new Day(),
+            monday: new Day("Monday"),
+            tuesday: new Day("Tuesday"),
+            wednesday: new Day("Wednesday"),
+            thursday: new Day("Thursday"),
+            friday: new Day("Friday"),
+            saturday: new Day("Saturday"),
+            sunday: new Day("Sunday"),
         };
     }
 

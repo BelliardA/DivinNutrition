@@ -87,7 +87,7 @@ function DashBoard({
  }, [user._weight]);
 
  const navigateToMealPlan = () => {
-    navigate("/meal-plan");
+    navigate("/meal-plan/"+ 48);  //dans le cas ou l'api fonctionne mettre : navigate("/meal-plan/"+ currentWeek);
   }
   const searchAliment = () => {
     navigate("/search-aliment");

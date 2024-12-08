@@ -1,0 +1,31 @@
+.back-row {
+    justify-self: flex-start;
+    border: none;
+    background-color: var(--main-background);
+    padding: 20px;
+    border-radius: 300Px;
+    margin-top: 40px;
+    width: 20%;
+}
+
+.days-selector{
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--main-background);
+    border-radius: 18px;
+}
+
+.day{
+    font-weight:400;
+}
+
+.days-selector button{
+    background-color: transparent;
+    border : none;
+}
+.feed-meal{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+}

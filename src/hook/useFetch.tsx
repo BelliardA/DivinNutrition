@@ -8,7 +8,7 @@ import { MealType } from "../objects/Constants";
 import moment from "moment";
 import IsFetch from "../store/IsFetch";
 
-function getMondayOfWeek(weekNumber: number, year: number): Date {
+export function getMondayOfWeek(weekNumber: number, year: number): Date {
   return moment().year(year).week(weekNumber).startOf("isoWeek").toDate();
 }
 

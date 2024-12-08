@@ -13,6 +13,8 @@ function CardMeal({ mealType, dayName }: CardMealProps) {
   const { week } = useMealStore();
   const [data, setData] = useState<string>();
 
+  
+
   useEffect(() => {
     switch (mealType) {
       case MealType.Breakfast:
