@@ -44,6 +44,12 @@ function MealPlan() {
   const backToMenu = () => {
     navigate("/");
 }
+const handleListeCourse = () => { 
+  navigate(`/liste-course`);
+}
+const handleDetail = (day:string, mealType:MealType) => {
+  navigate(`/recipe/${day}/${mealType}`);
+}
   return (
     <div>
       {currentDate && (
@@ -60,19 +66,26 @@ function MealPlan() {
           <section className="feed-meal">
             <div>
               <h2>Petit-déjeuner</h2>
-              <CardMeal key={`breakfast-${currentDayName}`} mealType={MealType.Breakfast} dayName={currentDayName} />
+              <button onClick={() => handleDetail(currentDayName, MealType.Breakfast)} className="btn-card-mealPlan">
+                <CardMeal key={`breakfast-${currentDayName}`} mealType={MealType.Breakfast} dayName={currentDayName} />
+              </button>
             </div>
             <div>
               <h2>Déjeuner</h2>
-              <CardMeal key={`lunch-${currentDayName}`} mealType={MealType.Lunch} dayName={currentDayName} />
+              <button onClick={() => handleDetail(currentDayName, MealType.Lunch)} className="btn-card-mealPlan">
+                <CardMeal key={`lunch-${currentDayName}`} mealType={MealType.Lunch} dayName={currentDayName} />
+              </button>
             </div>
             <div>
               <h2>Dîner</h2>
-              <CardMeal key={`dinner-${currentDayName}`} mealType={MealType.Dinner} dayName={currentDayName} />
+              <button className="btn-card-mealPlan" onClick={() => handleDetail(currentDayName, MealType.Dinner)}>
+                <CardMeal key={`dinner-${currentDayName}`} mealType={MealType.Dinner} dayName={currentDayName} />
+              </button>
             </div>
           </section>
         </div>
       )}
+      <button className="btn-course" onClick={handleListeCourse}><h3>Liste de course</h3></button>
     </div>
   );
 }

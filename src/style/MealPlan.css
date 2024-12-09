@@ -29,3 +29,18 @@
     gap: 30px;
     margin-top: 40px;
 }
+
+.btn-course{
+    margin-top: 50px;
+    background-color: var(--main-background);
+    border: 1px solid var(--yellow-glucide);
+    box-shadow: var(--box-shadow);
+    border-radius: 100px;
+    padding: 0rem 7rem;
+}
+
+.btn-card-mealPlan{
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
