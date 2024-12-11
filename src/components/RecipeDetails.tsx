@@ -40,10 +40,13 @@ function RecipeDetails (){
             setNbServing(nbServing - 1);
         }
     }
+
+    const handleSeeRecipe = () => {
+        navigate(`/recipe/${day}/${mealType}`);
+    }
     
-    console.log(recipe);
     return (
-        <div>
+        <main className="recipe-details">
             <button onClick={backToMenu} className="back-row">
                 <ArrowLeft size={36} color="#000000" />
             </button>
@@ -94,7 +97,7 @@ function RecipeDetails (){
                 </div>
             </section>
             <section className="ingredients">
-                <h3>Ingrédients 🧑‍🍳</h3>
+                <h2>Ingrédients 🧑‍🍳</h2>
                <div className="nb-serving">
                 <button onClick={handleMinus}>
                     <Minus />
@@ -106,18 +109,19 @@ function RecipeDetails (){
                </div>
                <div className="ingredients-list">
                     {recipe.ingredients.map((ingredient, index) => (
-                        <div key={index} className="">
+                        <div key={index} className="list-organisation">
                             <div className="ingredient-in-list">
                                 <p className="ingredient-food">{ingredient.quantity * nbServing} {ingredient.measure != "<unit>" ? ingredient.measure : null}</p>
                                 <img src={ingredient.image} alt={ingredient.foodCategory} />
                                 <p className="p-discret ingredient-food">{ingredient.food}</p>
                             </div>
-                            <div className="separateur"></div>
+                            <div className="separateur-ingredients"></div>
                         </div>
                     ))}
                </div>
             </section>
-        </div>
+            <button onClick={handleSeeRecipe} className="btn-go-recipe"><h3>Voir la recette</h3></button>
+        </main>
     )
 }
 

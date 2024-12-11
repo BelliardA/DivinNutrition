@@ -48,7 +48,7 @@ const handleListeCourse = () => {
   navigate(`/liste-course`);
 }
 const handleDetail = (day:string, mealType:MealType) => {
-  navigate(`/recipe/${day}/${mealType}`);
+  navigate(`/recipe-details/${day}/${mealType}`);
 }
   return (
     <div>

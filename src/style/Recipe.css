@@ -1,0 +1,7 @@
+.ingredient-steps{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 5%;
+    max-width: 90%;
+}
