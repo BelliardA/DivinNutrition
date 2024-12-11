@@ -8,6 +8,7 @@ import useFetch from "../hook/useFetch";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CalendarDays, Plus} from "lucide-react";
+import Aliment from "../store/Aliment";
 
 
 import Chart from "./Chart";
@@ -64,6 +65,11 @@ function DashBoard({
   const { user, updateUser } = useUserStore();
   const navigate = useNavigate();
   const {isFetch} = IsFetch();
+  const {nutrients} = Aliment();
+  const [fat, setFat] = useState<number>(0);
+  const [carbs, setCarbs] = useState<number>(0);
+  const [proteins, setProteins] = useState<number>(0);
+  const [calories, setCalories] = useState<number>(0);
 
   const newUser = new User({
     name: user._name,
@@ -86,6 +92,27 @@ function DashBoard({
     setMacroNutrient(newUser.nessesaryMacroNutr());
  }, [user._weight]);
 
+ useEffect(() => {
+  let fatTmp = 0;
+  let carbsTmp = 0;
+  let proteinsTmp = 0;
+  let caloriesTmp = 0;
+  for(let i = 0; i < nutrients.length; i++){
+    fatTmp += nutrients[i].lipids;
+    carbsTmp += nutrients[i].glucides;
+    proteinsTmp += nutrients[i].protein;
+    caloriesTmp += nutrients[i].calories;
+  }
+
+  setFat(fatTmp);
+  setCarbs(carbsTmp);
+  setProteins(proteinsTmp);
+  setCalories(caloriesTmp);
+
+  console.log(fatTmp, carbsTmp, proteinsTmp, caloriesTmp);
+ }, [nutrients]);
+
+
  const navigateToMealPlan = () => {
     navigate("/meal-plan/"+ 48);  //dans le cas ou l'api fonctionne mettre : navigate("/meal-plan/"+ currentWeek);
   }
@@ -98,7 +125,7 @@ function DashBoard({
     <section className="stat">
       <h1>Bonjour {newUser._name }</h1>
       {macroNutrient && 
-      <Chart lipids={macroNutrient.lipids} glucides={macroNutrient.glucides} proteins={macroNutrient.protein} caloriesPerDay={caloriesPerDay}/>
+      <Chart lipids={Math.round(macroNutrient.lipids - fat)} glucides={Math.round(macroNutrient.glucides - carbs)} proteins={Math.round(macroNutrient.protein - proteins)} caloriesPerDay={Math.round(caloriesPerDay - calories)}/>
       }
       <ButtonWeight user={newUser} updateUser={updateUser}/>
     </section>

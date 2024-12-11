@@ -10,9 +10,8 @@ export interface macroNutrient{
 }
 
 function List() {
-  const { alimentsId, setNutrients} = Aliment();
+  const { alimentsId, delAliments} = Aliment();
   const [aliments, setAliments] = useState<any[]>([]); // To store the fetched aliment data
-  const [prepareForNutrients, setPrepareForNutrients] = useState<macroNutrient[]>([]);
 
   const fetchAliments = async (id: number) => {
     try {
@@ -38,21 +37,20 @@ function List() {
     };
 
     fetchAllAliments();
+
+
   }, [alimentsId]); 
 
-  const handleAddAliment = (id: number) => {
-    console.log("Aliment added:", id);
+  const handleDelAliment = (id:number, name: string) => {
+    const confirmDelete = window.confirm(`Voulez-vous vraiment supprimer ${name} de la liste ?`);
+
+    if (confirmDelete) {
+      delAliments(id);
+    }
+    else{
+      return;
+    }
   };
-
-  aliments.map((aliment) => {
-    let fat = aliment.nutriments_estimated.fat_100g;
-    let protein = aliment.nutriments_estimated.proteins_100g;
-    let carbohydrates = aliment.nutriments_estimated.carbohydrates_100g;
-    let calories = aliment.nutriments_estimated["energy-kcal_100g"];
-    console.log("Fat:", fat, "Protein:", protein, "Carbohydrates:", carbohydrates, "Calories:", calories);
-  });
-
-  console.log("Aliments:", aliments);
 
   return (
     <div className="results">
@@ -65,7 +63,7 @@ function List() {
         <div key={aliment.id}>
           <button
             className="btn-add-liste"
-            onClick={() => handleAddAliment(aliment.id)}
+            onClick={() => handleDelAliment(aliment.id, aliment.product_name)}
           >
             <div className="ligne">
               <p>{aliment.product_name}</p>

@@ -4,12 +4,13 @@ import "../style/SearchAliment.css";
 import { Search, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Aliment from "../store/Aliment";
+import { macroNutrient } from "./Liste";
 
 function SearchAliment() {
   const [search, setSearch] = useState<string>("");
   const [aliments, setAliment] = useState<any[]>([]);
     const navigate = useNavigate();
-    const {setAliments} = Aliment();
+    const {setAliments, setNutrients} = Aliment();
 
   const fetchAliments = async (url: string) => {
     try {
@@ -18,7 +19,6 @@ function SearchAliment() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data); // Logs the entire response data
       setAliment(data.products); // Update state with fetched products
     } catch (error) {
       console.error("Fetch error:", error); // Logs any error that occurs
@@ -40,7 +40,9 @@ function SearchAliment() {
     setSearch(e.target.value);
   };
 
-  const handleAddAliment = (id: number) => {
+  const handleAddAliment = (id: number, fat : number, protein : number, carbohydrates : number, calories : number) => {
+    const macroNutrient : macroNutrient = {protein: protein, glucides: carbohydrates, lipids: fat, calories: calories};
+    setNutrients(macroNutrient);
     setAliments(id);
     navigate("/");
   };
@@ -79,7 +81,7 @@ function SearchAliment() {
             <div key={aliment.id}>
               <button
                 className="btn-add-liste"
-                onClick={() => handleAddAliment(aliment.id)}
+                onClick={() => handleAddAliment(aliment.id, aliment.nutriments.fat, aliment.nutriments.proteins, aliment.nutriments.carbohydrates, aliment.nutriments["energy-kcal_100g"])}
               >
                 <div className="ligne">
                   <p>{aliment.product_name}</p>
