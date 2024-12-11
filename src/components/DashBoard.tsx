@@ -108,8 +108,6 @@ function DashBoard({
   setCarbs(carbsTmp);
   setProteins(proteinsTmp);
   setCalories(caloriesTmp);
-
-  console.log(fatTmp, carbsTmp, proteinsTmp, caloriesTmp);
  }, [nutrients]);
 
 
