@@ -15,6 +15,11 @@
     width: 280%;
 }
 
+.btn-card{
+    border: none;
+    background-color: transparent;
+}
+
 .title-meal{
     display: flex;
     justify-content: space-between;

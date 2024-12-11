@@ -120,6 +120,10 @@ function DashBoard({
     navigate("/search-aliment");
   }
 
+  const handleEatMeal = (currentMeal : string, currentDay : string) => {
+    console.log("eat meal");
+  }
+
   return (
   <main className="mainDashboard">
     <section className="stat">
@@ -134,7 +138,9 @@ function DashBoard({
         <h2>{getCurrentMeal()[0]}</h2>
         <button className="btn-navig" onClick={navigateToMealPlan}><CalendarDays size={40} /></button>
       </div>
-      <CardMeal mealType={getCurrentMeal()[1]} dayName={getCurrentDayName()}/>
+      <button onClick={() => handleEatMeal(getCurrentMeal()[1], getCurrentDayName())} className="btn-card">
+        <CardMeal mealType={getCurrentMeal()[1]} dayName={getCurrentDayName()}/>
+      </button>
     </section>
     <section className="en-cas">
       <h2>En-cas</h2>

@@ -1,11 +1,10 @@
 .bloc-question{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 20px;
-    height: 75%;
-    width: 85%;
-    background-color: rgb(120, 80, 80);
+    margin-top: 10vh;
+    height: 75vh;
+    width: 90%;
+    background-color: var(--main-background);
+    box-shadow: var(--box-shadow);
     border-radius: 30pt;
 }
 

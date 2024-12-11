@@ -20,15 +20,16 @@ interface AgeProps {
     };  
   
     return (
-      <div>
+      <div className="container-question">
+        <form className="formulaire" onSubmit={handleSubmit}>
         <h1>Vous avez quel age ?</h1>
-        <form onSubmit={handleSubmit}>
           <input
+            className="input"
             type="number"
             value={age} // Lier l'input à la valeur 'name'
             onChange={handleChange} // Mettre à jour le 'name' à chaque saisie
           />
-          <button type="submit">Suivant</button>
+          <button className="btn-submit" type="submit"><h3>Suivant</h3></button>
         </form>
       </div>
     );

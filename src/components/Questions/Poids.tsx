@@ -20,15 +20,16 @@ interface PoidsProps {
     };
   
     return (
-      <div>
-        <h1>Quel est votre poids en Kg ?</h1>
-        <form onSubmit={handleSubmit}>
+      <div className="container-question">
+        <form className="formulaire" onSubmit={handleSubmit}>
+          <h1>Quel est votre poids en Kg ?</h1>
           <input
+            className="input"
             type="number"
             value={weight} // Lier l'input à la valeur 'name'
             onChange={handleChange} // Mettre à jour le 'name' à chaque saisie
           />
-          <button type="submit">Suivant</button>
+          <button className="btn-submit" type="submit"><h3>Suivant</h3></button>
         </form>
       </div>
     );

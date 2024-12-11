@@ -12,7 +12,7 @@ function Home() {
 
   
 
-  if(isQuestionnaire) { //mettre !isQuestionnaire pour la version finale
+  if(!isQuestionnaire) { //mettre !isQuestionnaire pour la version finale
     return (
       <div>
         <StartQuestion setIsQuestionnaire={setIsQuestionnaire} />

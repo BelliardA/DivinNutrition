@@ -1,0 +1,49 @@
+.container-question{
+    height: 100%
+}
+
+.formulaire{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input{
+    padding: 1.3rem;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.input:focus{
+    border: 1px solid var(--yellow-glucide);
+}
+
+.btn-submit{
+    border: var(--yellow-glucide) 1px solid;
+    background-color: transparent;
+    border-radius: 30px;
+}
+
+.group-radio{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulaire label{
+    display: flex ;
+    gap: 20px;
+    align-items: center;
+}
+
+.radio {
+    height: 30px;
+    width: 30px;
+    transition: 0.2s all linear;
+    border: 2px solid black;
+}
+
+.radio:checked{
+    border: 12px solid yellow;
+}
