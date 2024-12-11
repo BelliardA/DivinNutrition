@@ -39,6 +39,7 @@
     background-color: aqua;
     border-radius: 1.875rem;
     align-self: center;
+    background-size: cover;
 }
 
 .kcal-recipe{

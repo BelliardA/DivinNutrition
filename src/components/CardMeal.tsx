@@ -35,7 +35,7 @@ function CardMeal({ mealType, dayName }: CardMealProps) {
       <section className="containCard">
         <div
           className="card"
-          style={{ backgroundImage: `url(${data.recipe.image})` }}
+          style={{ backgroundImage: `url(https://recipeimages.migros.ch/crop/v-w-2000-h-1500-a-center_center/e5e22aa30baed1b3a2390fcfafc89b8eb5683a0d/riz-casimir-0-4-3.jpg)` }} //style={{ backgroundImage: `url(${data.recipe.image})` }} dans le cas ou l'api fonctionne
         >
           <div className="title-card">
             <h4>{data.recipe.label}</h4>

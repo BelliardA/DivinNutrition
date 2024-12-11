@@ -67,7 +67,7 @@ function RecipeDetails (){
                 </div>
                 <div
                 className="card-recipe"
-                style={{ backgroundImage: `url(${recipe.image})` }}></div>
+                style={{ backgroundImage: `url(https://recipeimages.migros.ch/crop/v-w-2000-h-1500-a-center_center/e5e22aa30baed1b3a2390fcfafc89b8eb5683a0d/riz-casimir-0-4-3.jpg)` }}></div>
                 <div className="kcal-recipe">
                     <h1>{Math.round(recipe.totalNutrients.ENERC_KCAL.quantity / recipe.yield)} kcal</h1>
                     <p>Par portion</p>
